@@ -1,0 +1,84 @@
+﻿@model Airline.Model.Models.NewTicketViewModel
+@{
+    ViewBag.Title = "NewTicket";
+    int num;
+    int totalPrice = Model.TotalPrice;
+}
+<div class="container animated animatedFadeInUp fadeInUp">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <br />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row2">
+                @for (int i = 0; i < Model.Amount; i++)
+                {
+                    {
+                        num = i + 1;
+                    }
+                    <div id="passengerItem" class="col" style="">
+                        <label style="font-size:13pt;padding: 0 20px;">Passenger №@num</label>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.EditorFor(x => Model.Passengers[i].Name, new { htmlAttributes = new { @style = "text-transform: capitalize", @class = "form-control", @placeholder = "Name" } })
+                                @Html.ValidationMessageFor(x => Model.Passengers[i].Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.EditorFor(x => Model.Passengers[i].Surname, new { htmlAttributes = new { @style = "text-transform: capitalize", @class = "form-control", @placeholder = "Surname" } })
+                                @Html.ValidationMessageFor(x => Model.Passengers[i].Surname, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.EditorFor(x => Model.Passengers[i].Passport, new { htmlAttributes = new { @*@style = "text-transform: uppercase",*@ @class = "form-control", @placeholder = "Passport: AB1234567" } })
+                                @Html.ValidationMessageFor(x => Model.Passengers[i].Passport, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="row2">
+                <div class="col"></div>
+                <div class="col-5">
+                    <label style="font-size:14pt; font-style:normal; font-weight:300">Total prise is <span style="font-weight:600">@totalPrice$</span>, please enter your card number:</label>
+                </div>
+                <div class="col-5">
+                    @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control", @style = "height: 28px;", @placeholder = "Enter 16 characters" } })
+                    @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row2" style="margin-top:15px">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <a class="btn btn-secondary" href="/Booking/Index">Back to bookings</a>
+                    <input type="submit" value="Buy ticket" class="btn btn-success" />
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FlightId, new { htmlAttributes = new { @type = "hidden", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FlightId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @type = "hidden", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

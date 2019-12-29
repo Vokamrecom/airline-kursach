@@ -1,0 +1,267 @@
+﻿@using Airline.Logic.Services
+@using Airline.Model.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    @inject IPassengerService passengerService
+    @inject INotificationService notificationService
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Airline.Website</title>
+
+    <link rel="stylesheet" type="text/css" href="/Style/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Style/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/Style/css/vendor/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="/Style/css/vendor/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="/Style/css/vendor/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/Style/css/vendor/Site.css" />
+    <link rel="stylesheet" type="text/css" href="/Style/css/Style.css" />
+</head>
+<body>
+    @{
+        var isAuthenticated = false;
+        var isAdmin = false;
+        var count = 0;
+        NotificationView notifications = null;
+
+        if (User.Identity.IsAuthenticated)
+        {
+            isAuthenticated = true;
+            isAdmin = passengerService.IsAdmin(User.Identity.Name);
+            notifications = notificationService.GetUsersNotifications(User.Identity.Name);
+            count = notifications.Count;
+        }
+    }
+
+    <div class="animationload">
+        <div class="loader"></div>
+    </div>
+
+    <!-- BACK TO TOP SECTION -->
+    <a href="#0" class="cd-top cd-is-visible cd-fade-out">Top</a>
+
+    <div class="header header-1">
+        <div class="navbar-main" style="background-color: #273039;">
+            <div class="container">
+                <nav id="navbar-example" style="margin-bottom:0px" class="navbar navbar-expand-lg ">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav  navbar-left">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Index" style="padding-top:12px; font-size:23px; padding-bottom:14px" role="button" aria-haspopup="true" aria-expanded="false">
+                                    ERMAKOFF AIRLINE <i class="fa fa-plane" style="font-size:23px"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <label style="font-size: 1.25vw;margin-bottom: 0 !important;">@ViewBag.Title</label>
+                        <ul class="navbar-nav ml-auto navbar-right">
+
+                            @if (isAuthenticated)
+                            {
+                                if (isAdmin)
+                                {
+                                    <li class="nav-item">
+                                        <a id="btn-tooltip" class="nav-link" title="Admin panel" href="/Admin/Index" style="padding: 16px 10px 16px 10px;" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <span style="font-size:19px"><i class="fa fa-user-crown" style="font-size:18px"></i>ADMIN PANEL</span>
+                                        </a>
+                                    </li>
+                                }
+                                <li class="nav-item">
+                                    <a id="btn-tooltip" class="nav-link" title="My bookings" href="/Booking/Index" style="padding: 16px 10px 16px 10px;" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-bookmark" style="font-size:24px"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="btn-tooltip" class="nav-link" title="My tickets" href="/Ticket/Index" style="padding: 16px 10px 16px 10px;" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-ticket" style="font-size:24px"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="btn-tooltip" class="nav-link" title="My profile" href="/Account/MyAccount" style="padding: 16px 10px 16px 10px;" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-user" style="font-size:24px"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="btn-tooltip" class="nav-link" title="My notifications" data-toggle="modal" data-target="#MyNotifications" style="padding: 16px 10px 16px 10px;" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-bell" style="font-size:24px"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="btn-tooltip" class="nav-link" title="Logout" href="/Account/Logout" style="padding: 16px 20px 16px 20px;" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-sign-out" style="font-size:26px"></i>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a id="btn-tooltip" class="nav-link" title="Login" href="/Account/Login" style="padding: 16px 20px 16px 20px;" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-sign-in" style="font-size:26px"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <partial name="_CookieConsentPartial" />
+
+    <div class="site-wrap animated animatedFadeIn  fadeInUp" style="min-height: 1000px; background-color:#02181e">
+        <div class="body-content" style="max-width: 100%">
+            @RenderBody()
+        </div>
+    </div>
+    <div class="footer">
+        <div class="content-wrap" style="padding:0px; background-color:#36424e">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 col-lg-6">
+                        <div class="footer-item">
+                            <div class="footer-title">
+                                Description
+                            </div>
+                            <div class="spacer-20"></div>
+                            <div @*style="border-right: 1px solid #42d4ec !important;"*@>
+                                <p>This web application of the company ErmakoffAirline is intended for booking and buying tickets for flights from anywhere in the world.</p>
+                                <div class="spacer-20"></div>
+                                <div class="sosmed-icon bg-round d-inline-flex">
+                                    <img src="~/Style/images/git.png" style="width:160px;height:160px" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                        <div class="footer-item">
+                            <div class="footer-title">
+                                Contact Info
+                            </div>
+                            <div>
+                                <p>Lit sed The Best in dolor sit amet consectetur</p>
+                                <ul class="list-info">
+                                    <li>
+                                        <div class="info-icon text-primary">
+                                            <span class="fa fa-map-marker"></span>
+                                        </div>
+                                        <div class="info-text">23 Hurskaha St 220089.<br /> Minsk, Belarus</div>
+                                    </li>
+                                    <li>
+                                        <div class="info-icon text-primary">
+                                            <span class="fa fa-phone"></span>
+                                        </div>
+                                        <div class="info-text">+(375) 25-603-27-99</div>
+                                    </li>
+                                    <li>
+                                        <div class="info-icon text-primary">
+                                            <span class="fa fa-envelope"></span>
+                                        </div>
+                                        <div class="info-text"><a href="mailto:ermakovkiril@gmail.com">ermakovkiril@gmail.com</a></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                        <div class="footer-item">
+                            <div class="footer-title">
+                                Userful Link
+                            </div>
+                            <div>
+                                <p>Our support available to help you 24 hours a day. We provide our best.</p>
+                                <ul class="list-info" style="margin-left: 20px;">
+                                    <li class="row">
+                                        <div class="info-icon text-primary">
+                                            <span class="fa fa-envelope"></span>
+                                        </div>
+                                        <div class="info-text"><a href="#" title="About us">About</a></div>
+                                    </li>
+                                    <li class="row">
+                                        <div class="info-icon text-primary">
+                                            <span class="fa fa-bookmark"></span>
+                                        </div>
+                                        <div class="info-text"><a href="/Booking/Index" title="My bookings">Bookings</a></div>
+                                    </li>
+                                    <li class="row">
+                                        <div class="info-icon text-primary">
+                                            <span class="fa fa-ticket"></span>
+                                        </div>
+                                        <div class="info-text"><a href="/Ticket/Index" title="My tickets">Tickets</a></div>
+                                    </li>
+                                    <li class="row">
+                                        <div class="info-icon text-primary">
+                                            <span class="fa fa-user"></span>
+                                        </div>
+                                        <div class="info-text"><a href="/Account/MyAccount" title="My account">Profile</a></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="fcopy">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <p class="ftex">&copy; 2019 <span class="text-primary">ErmakoffAirways</span>. All Rights Reserved. Designed By <span class="text-primary">Ermakov Kiril</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="MyNotifications" tabindex="-1" role="dialog" aria-hidden="true" style="height: 400px;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <h2 class="modal-title" style="text-align:center">Notifications</h2>
+                <div class="modal-header"></div>
+                <div class="modal-body">
+                    @if (count > 0)
+                    {
+                        foreach (NotificationViewModel n in notifications.List)
+                        {
+                            @Html.Partial("NotificationPartialView", n);
+                        }
+                    }
+                    else
+                    {
+                        <h4 style="text-align:center">You have no new notifications</h4>
+                    }
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/Style/js/vendor/site.js" asp-append-version="true"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+    </script>
+    <script src="~/Style/js/vendor/site.min.js" asp-append-version="true"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

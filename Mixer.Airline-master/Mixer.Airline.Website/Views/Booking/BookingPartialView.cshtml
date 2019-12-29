@@ -1,0 +1,79 @@
+﻿@using Airline.Model.Models
+@model PaginationModel
+@{
+    int number = 0;
+    var bookings = Model.BookingList.Data;
+    int pagesCount = Model.BookingList.PagesCount;
+    int rowsCount = Model.BookingList.RowsCount;
+}
+
+<br />
+@if (pagesCount > 1)
+{
+    <div id="pugBookingButtons1" style="margin: auto; width: max-content;">
+        @for (int i = 0; i < pagesCount; i++)
+        {
+            number = i + 1;
+            <button value="@i" style="border-radius:20px" name="@pagesCount" onclick="FuncPugBookings(@i, @pagesCount)" id="page_btn" class="btn btn-def-pag">@number</button>
+        }
+    </div>
+}
+
+@if (rowsCount > 0)
+{
+    foreach (BookingViewModel b in bookings)
+    {
+        <div class="shadow2 animated animatedFadeInUp fadeInUp">
+            <br />
+            <div class="row2">
+                <div class="col-3">
+                    <div class="col my_span">
+                        <span style="font-weight:900; font-size:2.5vw">@b.Price$</span><br />
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-5 my_span">
+                            <span style="font-size: 1.9vw;">@b.DepartureAirport</span>
+                            <span style="font-size: 1.2vw;"> @b.DepartureDateTime.ToString("d/MM/yyyy H:mm tt")</span>
+                        </div>
+                        <div>
+                            <i class="fa fa-arrow-right" aria-hidden="true" style="font-size: 1.7vw;margin-top: 0.5vw;"></i>
+                        </div>
+                        <div class="col-5 my_span">
+                            <span style="font-size: 1.9vw;">@b.ArrivalAirport</span>
+                            <span style="font-size: 1.2vw;">@b.ArrivalDateTime.ToString("d/MM/yyyy H:mm tt") </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row2">
+                <div class="col-3 my_span">
+                    <span style="font-weight:900; font-size:2vw">@b.FlightNumber</span><br />
+                </div>
+                <div class="col-6 my_span">
+                    @Html.ActionLink("Cancel booking", "CancelBooking", new { bookingId = @b.BookingId }, new { @class = " btn-secondary" })
+                    @Html.ActionLink($"Buy {b.Amount} ticket(s)", "NewTicket", new { bookingId = @b.BookingId }, new { @class = "btn btn-success" })
+                </div>
+                <div class="col-3 my_span">
+                </div>
+            </div>
+            <br />
+        </div>
+    }
+}
+else
+{
+    <div style="margin: auto; width: max-content;  font-size:large">You have no active bookings</div>
+}
+<br />
+@if (pagesCount > 1)
+{
+    <div id="pugBookingButtons2" style="margin: auto; width: max-content;">
+        @for (int i = 0; i < pagesCount; i++)
+        {
+            number = i + 1;
+            <button value="@i" style="border-radius:20px" name="@pagesCount" onclick="FuncPugBookings(@i, @pagesCount)" id="page_btn" class="btn btn-def-pag">@number</button>
+        }
+    </div>
+}

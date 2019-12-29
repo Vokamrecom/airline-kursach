@@ -1,0 +1,54 @@
+﻿@using Airline.Model.Models
+@model PaginationModel
+@{
+    int number = 0;
+    var tickets = Model.TicketList.Data;
+    int pagesCount = Model.TicketList.PagesCount;
+    int rowsCount = Model.TicketList.RowsCount;
+}
+
+<br />
+@if (pagesCount > 1)
+{
+    <div id="pugAdminTicketsButtons" style="margin: auto; width: max-content;">
+        @for (int i = 0; i < pagesCount; i++)
+        {
+            number = i + 1;
+            <button value="@i" style="border-radius:20px" name="@pagesCount" onclick="FuncAdminPugTickets(@i, @pagesCount)" id="page_btn" style="margin-left:5px" class="btn btn-def-pag">@number</button>
+        }
+    </div>
+}
+
+<h3 style="text-align:center">Tickets</h3>
+@if (rowsCount > 0)
+{
+    <table class="table table-hover animated animatedFadeInUp fadeInUp" style="">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Passport</th>
+                <th scope="col">Flight number</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TicketViewModel t in tickets)
+            {
+                <tr>
+                    <td>@t.TicketId</td>
+                    <td>@t.PassengerName</td>
+                    <td>@t.PassengerSurname</td>
+                    <td>@t.Passport</td>
+                    <td>@t.FlightNumber</td>
+                    <td>@Html.ActionLink("Delete ticket", "DeleteTicket", new { ticketId = @t.TicketId })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div style="margin: auto; width: max-content;">There are no tickets</div>
+}

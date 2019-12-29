@@ -1,0 +1,174 @@
+﻿@model Airline.Model.Models.PaginationModel
+@{
+    ViewBag.Title = "Admin Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a id="mainLink" class="nav-link" data-toggle="tab" href="#flights">Flights</a>
+                </li>
+                <li class="nav-item">
+                    <a id="mainLink" class="nav-link" data-toggle="tab" href="#passengers">Passengers</a>
+                </li>
+                <li class="nav-item">
+                    <a id="mainLink" class="nav-link" data-toggle="tab" href="#bookings">Bookings</a>
+                </li>
+                <li class="nav-item">
+                    <a id="mainLink" class="nav-link" data-toggle="tab" href="#tickets">Tickets</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-10">
+            <div class="tab-content animated animatedFadeInUp fadeInUp">
+                <div id="flights" class="container tab-pane active">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#all">Flights</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#new">New flight</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="all" class="tab-pane in active" style="margin-top:10px">
+                            <div id="flights-container">
+                                @await Component.InvokeAsync("Flights")
+                            </div>
+                        </div>
+                        <div id="new" class="tab-pane fade animated animatedFadeInUp fadeInUp">
+
+                            @using (Html.BeginForm("NewFlight", "Admin", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+                                    <br />
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.FlightNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.EditorFor(model => model.FlightNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Format: AB123" } })
+                                            @Html.ValidationMessageFor(model => model.DepartureTime, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.EditorFor(model => model.DepartureDate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.DepartureDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.DepartureTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.EditorFor(model => model.DepartureTime, new { htmlAttributes = new { @type = "time", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.DepartureTime, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.DepartureAirport, "DepartureAirport", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.DropDownList("DepartureAirport", (SelectList)Model.AirportList, htmlAttributes: new { @class = "form-control", @style = "height: 35px" })
+                                            @Html.ValidationMessageFor(model => model.DepartureAirport, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.AircraftCode, "AircraftCode", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.DropDownList("AircraftCode", (SelectList)Model.AircraftList, htmlAttributes: new { @class = "form-control", @style = "height: 35px" })
+                                            @Html.ValidationMessageFor(model => model.AircraftCode, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.ArrivalDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.EditorFor(model => model.ArrivalDate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ArrivalDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                        @Html.LabelFor(model => model.ArrivalTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.EditorFor(model => model.ArrivalTime, new { htmlAttributes = new { @type = "time", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ArrivalTime, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.ArrivalAirport, "ArrivalAirport", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.DropDownList("ArrivalAirport", (SelectList)Model.AirportList, htmlAttributes: new { @class = "form-control", @style = "height: 35px" })
+                                            @Html.ValidationMessageFor(model => model.ArrivalAirport, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-offset-2 col-md-12">
+                                        <input type="submit" value="Create" class="btn btn-success" />
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div id="passengers" class="container tab-pane fade">
+                    <div id="passengers-container">
+                        @await Component.InvokeAsync("Passengers")
+                    </div>
+                </div>
+                <div id="bookings" class="container tab-pane fade">
+                    <div id="bookings-container">
+                        @await Component.InvokeAsync("Bookings")
+                    </div>
+                </div>
+                <div id="tickets" class="container tab-pane fade">
+                    <div id="tickets-container">
+                        @await Component.InvokeAsync("Tickets")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

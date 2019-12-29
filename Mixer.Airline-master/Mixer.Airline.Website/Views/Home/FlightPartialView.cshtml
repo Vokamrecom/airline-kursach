@@ -1,0 +1,82 @@
+﻿@using Airline.Model.Models
+@model Airline.Model.PaginationModels.FlightPaginationModel
+@{
+    int number = 0;
+    var flights = Model.FlightList.Data;
+    int pagesCount = Model.FlightList.PagesCount;
+}
+<div style="margin: auto; width: max-content; font-size:20px">@Model.FlightList.Message</div>
+<br />
+@if (pagesCount > 1)
+{
+    <div id="pugButtons1" style="margin: auto; width: max-content;">
+        @for (int i = 0; i < Math.Min(11, pagesCount); i++)
+        {
+            number = i + 1;
+            <button value="@i" style="border-radius:20px" name="@pagesCount" onclick="FuncPugFlights(@i, @pagesCount)" id="page_btn" class="btn btn-def-pag">@number</button>
+        }
+    </div>
+}
+<div class="container" style="border-bottom: 3px solid #42d4ec;">
+    @if (pagesCount >= 0)
+    {
+        foreach (FlightViewModel f in flights)
+        {
+            <div class="shadow1 animated animatedFadeInUp fadeInUp">
+                <br />
+                <div class="row">
+                    <div class="col-5">
+                        <div class="row">
+                            <div class="col-5 my_span">
+                                <span style="font-size: 1.1vw; font-weight: 900;">@f.DepartureAirport</span><br />
+                                <span style="font-size: 1.1vw;">@f.DepartureDateTime.ToString("dd.MM hh:mm")</span><br />
+                            </div>
+                            <div class="col my_span">
+                                <i class="fa fa-arrow-right" aria-hidden="true" style="font-size: 1.5vw;margin-top: 0.6vw;"></i>
+                            </div>
+                            <div class="col-5 my_span">
+                                <span style="font-size: 1.1vw; font-weight: 900;">@f.ArrivalAirport</span><br />
+                                <span style="font-size: 1.1vw;">@f.ArrivalDateTime.ToString("t")</span><br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="col my_span">
+                            <span style="font-size: 1.1vw;">@f.FlightNumber</span>
+                            <span style="font-size: 1.1vw; font-weight: 700;">@f.FreePlaces left</span>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="col my_span">
+                            <span style="font-size: 2.3vw;">@f.Price$</span>
+                        </div>
+                    </div>
+                    <div class="col-3 my_span">
+                        @if (@f.DepartureDateTime >= DateTime.Now)
+                        {
+                            @Html.ActionLink($"Book now", "NewBooking", new { flightId = @f.FlightId }, new { @class = "btn btn-secondary search-btn" })
+                            ViewBag.RedirectUrl = "hello";
+                        }
+                        else
+                        {
+                            <span style="font-weight:bold">This flight is <br> no longer<br> available</span>
+                        }
+                    </div>
+                </div>
+                <br />
+            </div>
+        }
+    }
+    <br />
+    @if (pagesCount > 1)
+    {
+        <div id="pugButtons2" style="margin: auto; width: max-content;">
+            @for (int i = 0; i < Math.Min(11, pagesCount); i++)
+            {
+                number = i + 1;
+                <button value="@i" style="border-radius:20px" name="@pagesCount" onclick="FuncPugFlights(@i, @pagesCount)" id="page_btn" class="btn btn-def-pag">@number</button>
+            }
+        </div>
+    }
+    <br />
+</div>

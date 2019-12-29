@@ -1,0 +1,51 @@
+﻿@model Airline.Model.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row2 animated animatedFadeInUp fadeInUp">
+        <div class="col-sm-3">
+            <section id="loginForm">
+                <div class="form-horizontal">
+                    @if (Model.Message != null)
+                    {
+                        <h5 style="text-align:center;">@Model.Message</h5>
+                    }
+                    <br />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="padding:5px 20% 0">
+                            <input type="submit" value="Login" class="btn btn-success btn-block" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12" style="padding:0 30% 0">
+                            @Html.ActionLink("Create an account", "Registration", new { @class = "btn btn-default btn-block" })
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

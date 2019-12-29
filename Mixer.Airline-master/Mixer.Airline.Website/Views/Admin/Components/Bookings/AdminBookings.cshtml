@@ -1,0 +1,55 @@
+﻿@using Airline.Model.Models
+@model PaginationModel
+@{
+    int number = 0;
+    var bookings = Model.BookingList.Data;
+    int pagesCount = Model.BookingList.PagesCount;
+    int rowsCount = Model.BookingList.RowsCount;
+}
+
+<br />
+@if (pagesCount > 1)
+{
+    <div id="pugAdminBookingsButtons" style="margin: auto; width: max-content;">
+        @for (int i = 0; i < pagesCount; i++)
+        {
+            number = i + 1;
+            <button value="@i" style="border-radius:20px" name="@pagesCount" onclick="FuncAdminPugBookings(@i, @pagesCount)" id="page_btn" style="margin-left:5px" class="btn btn-def-pag">@number</button>
+        }
+    </div>
+}
+<h3 style="text-align:center">Bookings</h3>
+@if (rowsCount > 0)
+{
+    <table class="table table-hover animated animatedFadeInUp fadeInUp" style="">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Email</th>
+                <th scope="col">Flight number</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BookingViewModel b in bookings)
+            {
+                <tr>
+                    <td>@b.BookingId</td>
+                    <td>@b.PassengerName</td>
+                    <td>@b.PassengerSurname</td>
+                    <td>@b.PassengerEmail</td>
+                    <td>@b.FlightNumber</td>
+                    <td>@b.Amount</td>
+                    <td>@Html.ActionLink("Delete booking", "DeleteBooking", new { bookingId = @b.BookingId })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div style="margin: auto; width: max-content;">There are no bookings</div>
+}

@@ -1,0 +1,186 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <StartupObject></StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\css\**" />
+    <Compile Remove="wwwroot\images\**" />
+    <Compile Remove="wwwroot\js\**" />
+    <Content Remove="wwwroot\css\**" />
+    <Content Remove="wwwroot\images\**" />
+    <Content Remove="wwwroot\js\**" />
+    <EmbeddedResource Remove="wwwroot\css\**" />
+    <EmbeddedResource Remove="wwwroot\images\**" />
+    <EmbeddedResource Remove="wwwroot\js\**" />
+    <None Remove="wwwroot\css\**" />
+    <None Remove="wwwroot\images\**" />
+    <None Remove="wwwroot\js\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mixer.Airline.DataProvider\Airline.DataProvider.csproj" />
+    <ProjectReference Include="..\Mixer.Airline.Logic\Airline.Logic.csproj" />
+    <ProjectReference Include="..\Mixer.Airline.Model\Airline.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Components\Passengers\" />
+    <Folder Include="Views\Flight\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Admin\Components\Bookings\AdminBookings.cshtml" />
+    <None Include="Views\Admin\Components\Flights\AdminFlights.cshtml" />
+    <None Include="Views\Admin\Components\Passengers\AdminPassengers.cshtml" />
+    <None Include="Views\Admin\Components\Tickets\AdminTickets.cshtml" />
+    <None Include="Views\Admin\Index.cshtml" />
+    <None Include="Views\Booking\Index.cshtml" />
+    <None Include="Views\Booking\NewBooking.cshtml" />
+    <None Include="Views\Ticket\Index.cshtml" />
+    <None Include="Views\Ticket\NewTicket.cshtml" />
+    <None Include="wwwroot\Style\css\style.css" />
+    <None Include="wwwroot\Style\css\style.css.map" />
+    <None Include="wwwroot\Style\css\vendor\animate.css" />
+    <None Include="wwwroot\Style\css\vendor\animate.min.css" />
+    <None Include="wwwroot\Style\css\vendor\bootstrap.min.css" />
+    <None Include="wwwroot\Style\css\vendor\Carousel.css" />
+    <None Include="wwwroot\Style\css\vendor\font-awesome.min.css" />
+    <None Include="wwwroot\Style\css\vendor\magnific-popup.css" />
+    <None Include="wwwroot\Style\css\vendor\owl.carousel.min.css" />
+    <None Include="wwwroot\Style\css\vendor\owl.theme.default.min.css" />
+    <None Include="wwwroot\Style\css\vendor\reset.css" />
+    <None Include="wwwroot\Style\css\vendor\Site.css" />
+    <None Include="wwwroot\Style\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\Style\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\Style\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\Style\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\Style\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\Style\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\Style\fonts\sas-webfont.eot" />
+    <None Include="wwwroot\Style\fonts\sas-webfont.svg" />
+    <None Include="wwwroot\Style\fonts\sas-webfont.ttf" />
+    <None Include="wwwroot\Style\fonts\sas-webfont.woff" />
+    <None Include="wwwroot\Style\fonts\sas-webfont.woff2" />
+    <None Include="wwwroot\Style\images\.DS_Store" />
+    <None Include="wwwroot\Style\images\13237-airbus-airbus_a380-flight-airbus_a330-airline-1920x1080.jpg" />
+    <None Include="wwwroot\Style\images\about.jpg" />
+    <None Include="wwwroot\Style\images\apple-touch-icon-114x114.png" />
+    <None Include="wwwroot\Style\images\apple-touch-icon-72x72.png" />
+    <None Include="wwwroot\Style\images\apple-touch-icon.png" />
+    <None Include="wwwroot\Style\images\app_android.jpg" />
+    <None Include="wwwroot\Style\images\app_ios.jpg" />
+    <None Include="wwwroot\Style\images\bg.jpg" />
+    <None Include="wwwroot\Style\images\bg0.png" />
+    <None Include="wwwroot\Style\images\bg1.jpg" />
+    <None Include="wwwroot\Style\images\bg2.jpg" />
+    <None Include="wwwroot\Style\images\bg3.jpg" />
+    <None Include="wwwroot\Style\images\bg4.jpg" />
+    <None Include="wwwroot\Style\images\bg5.jpg" />
+    <None Include="wwwroot\Style\images\bg_1.jpg" />
+    <None Include="wwwroot\Style\images\bg_10.jpeg" />
+    <None Include="wwwroot\Style\images\bg_11.jpeg" />
+    <None Include="wwwroot\Style\images\bg_13.jpeg" />
+    <None Include="wwwroot\Style\images\bg_2.jpg" />
+    <None Include="wwwroot\Style\images\bg_3.jpeg" />
+    <None Include="wwwroot\Style\images\bg_3.jpg" />
+    <None Include="wwwroot\Style\images\bg_4.jpeg" />
+    <None Include="wwwroot\Style\images\bg_5.jpeg" />
+    <None Include="wwwroot\Style\images\bg_6.jpeg" />
+    <None Include="wwwroot\Style\images\bg_7.jpeg" />
+    <None Include="wwwroot\Style\images\bg_8.jpg" />
+    <None Include="wwwroot\Style\images\bg_9.jpg" />
+    <None Include="wwwroot\Style\images\cd-icon-controller.svg" />
+    <None Include="wwwroot\Style\images\cd-icon-location.png" />
+    <None Include="wwwroot\Style\images\cd-icon-location.svg" />
+    <None Include="wwwroot\Style\images\cd-top-arrow.svg" />
+    <None Include="wwwroot\Style\images\client1.png" />
+    <None Include="wwwroot\Style\images\client1w.png" />
+    <None Include="wwwroot\Style\images\client2.png" />
+    <None Include="wwwroot\Style\images\client2w.png" />
+    <None Include="wwwroot\Style\images\client3.png" />
+    <None Include="wwwroot\Style\images\client3w.png" />
+    <None Include="wwwroot\Style\images\client4.png" />
+    <None Include="wwwroot\Style\images\client4w.png" />
+    <None Include="wwwroot\Style\images\client5.png" />
+    <None Include="wwwroot\Style\images\client5w.png" />
+    <None Include="wwwroot\Style\images\client6.png" />
+    <None Include="wwwroot\Style\images\client6w.png" />
+    <None Include="wwwroot\Style\images\dummy-img-1920x300.jpg" />
+    <None Include="wwwroot\Style\images\dummy-img-1920x900-2.jpg" />
+    <None Include="wwwroot\Style\images\dummy-img-1920x900-3.jpg" />
+    <None Include="wwwroot\Style\images\dummy-img-1920x900.jpg" />
+    <None Include="wwwroot\Style\images\dummy-img-400x400.jpg" />
+    <None Include="wwwroot\Style\images\dummy-img-600x400.jpg" />
+    <None Include="wwwroot\Style\images\dummy-img-600x600.jpg" />
+    <None Include="wwwroot\Style\images\dummy-img-600x700.jpg" />
+    <None Include="wwwroot\Style\images\dummy-img-600x800.jpg" />
+    <None Include="wwwroot\Style\images\dummy-img-900x600.jpg" />
+    <None Include="wwwroot\Style\images\EMAIL.png" />
+    <None Include="wwwroot\Style\images\favicon.ico" />
+    <None Include="wwwroot\Style\images\frame.png" />
+    <None Include="wwwroot\Style\images\logo.png" />
+    <None Include="wwwroot\Style\images\ma+logo.png" />
+    <None Include="wwwroot\Style\images\ma+logo2.png" />
+    <None Include="wwwroot\Style\images\ML2.png" />
+    <None Include="wwwroot\Style\images\nophoto.png" />
+    <None Include="wwwroot\Style\images\signature.png" />
+    <None Include="wwwroot\Style\js\Carousel\.jscsrc" />
+    <None Include="wwwroot\Style\js\Carousel\.jshintrc" />
+    <None Include="wwwroot\Style\js\Carousel\owl.animate.js" />
+    <None Include="wwwroot\Style\js\Carousel\owl.autoheight.js" />
+    <None Include="wwwroot\Style\js\Carousel\owl.autoplay.js" />
+    <None Include="wwwroot\Style\js\Carousel\owl.autorefresh.js" />
+    <None Include="wwwroot\Style\js\Carousel\owl.carousel.js" />
+    <None Include="wwwroot\Style\js\Carousel\owl.hash.js" />
+    <None Include="wwwroot\Style\js\Carousel\owl.lazyload.js" />
+    <None Include="wwwroot\Style\js\Carousel\owl.navigation.js" />
+    <None Include="wwwroot\Style\js\Carousel\owl.support.js" />
+    <None Include="wwwroot\Style\js\Carousel\owl.support.modernizr.js" />
+    <None Include="wwwroot\Style\js\Carousel\owl.video.js" />
+    <None Include="wwwroot\Style\js\DataTable\dataTables.bootstrap4.min.css" />
+    <None Include="wwwroot\Style\js\DataTable\dataTables.bootstrap4.min.js" />
+    <None Include="wwwroot\Style\js\DataTable\jquery.dataTables.min.js" />
+    <None Include="wwwroot\Style\js\googlemap-setting.js" />
+    <None Include="wwwroot\Style\js\script.js" />
+    <None Include="wwwroot\Style\js\script.min.js" />
+    <None Include="wwwroot\Style\js\vendor\bootstrap-dropdownhover.min.js" />
+    <None Include="wwwroot\Style\js\vendor\bootstrap.min.js" />
+    <None Include="wwwroot\Style\js\vendor\easings.js" />
+    <None Include="wwwroot\Style\js\vendor\form-scripts.js" />
+    <None Include="wwwroot\Style\js\vendor\imagesloaded.pkgd.min.js" />
+    <None Include="wwwroot\Style\js\vendor\isotope.pkgd.min.js" />
+    <None Include="wwwroot\Style\js\vendor\jquery.magnific-popup.min.js" />
+    <None Include="wwwroot\Style\js\vendor\jquery.min.js" />
+    <None Include="wwwroot\Style\js\vendor\jquery.superslides.js" />
+    <None Include="wwwroot\Style\js\vendor\modernizr.min.js" />
+    <None Include="wwwroot\Style\js\vendor\owl.carousel.js" />
+    <None Include="wwwroot\Style\js\vendor\validator.min.js" />
+    <None Include="wwwroot\Style\js\vendor\waypoints.min.js" />
+    <None Include="wwwroot\Style\sass\components.scss" />
+    <None Include="wwwroot\Style\sass\custom-icon-font.scss" />
+    <None Include="wwwroot\Style\sass\footer.scss" />
+    <None Include="wwwroot\Style\sass\global.scss" />
+    <None Include="wwwroot\Style\sass\logo-nav.scss" />
+    <None Include="wwwroot\Style\sass\mixin.scss" />
+    <None Include="wwwroot\Style\sass\normalize.scss" />
+    <None Include="wwwroot\Style\sass\responsive.scss" />
+    <None Include="wwwroot\Style\sass\section.scss" />
+    <None Include="wwwroot\Style\sass\style.scss" />
+    <None Include="wwwroot\Style\sass\variable.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.Internal" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+  </ItemGroup>
+
+</Project>
